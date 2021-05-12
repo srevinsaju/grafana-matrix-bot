@@ -1,0 +1,34 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-16.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15
+
+      - name: Build
+        run: |
+          go build -ldflags "-s -w -X main.BuildVersion=$(git describe --tags --always) -X main.BuildTime=$(date +%s)" .
+      - name: Release Continuous
+        uses: marvinpinto/action-automatic-releases@latest
+        if: github.ref == 'refs/heads/main'
+        with:
+          prerelease: true
+          draft: false
+          automatic_release_tag: continuous
+          title: continuous
+          files: |
+            grafana-matrix-bot
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
