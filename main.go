@@ -9,9 +9,22 @@ import (
 	"os"
 )
 
+
 var logger = log.New(os.Stdout)
 
+// https://polyverse.com/blog/how-to-embed-versioning-information-in-go-applications-f76e2579b572/
+var (
+	BuildVersion string = ""
+	BuildTime    string = ""
+)
+
+
 func main() {
+	if BuildVersion != "" || BuildTime != "" {
+		logger.Infof("Grafana Matrix Bot %s Build:%s", BuildVersion, BuildTime)
+	} else {
+		logger.Info("Grafana Matrix Bot (local dev build)")
+	}
 	app := fiber.New()
 	logger.Infof("Starting fiber http server")
 
