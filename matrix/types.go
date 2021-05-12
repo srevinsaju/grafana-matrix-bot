@@ -8,4 +8,5 @@ type Config struct {
 	Homeserver string `json:"homeserver"`
 	ChannelId string `json:"channel_id"`
 	SecretKey string `json:"secret_key"`
+	Port int `json:"port"`
 }

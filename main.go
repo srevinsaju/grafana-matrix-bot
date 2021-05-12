@@ -67,7 +67,7 @@ func main() {
 
 	})
 
-	err = app.Listen(":3000")
+	err = app.Listen(fmt.Sprintf(":%d", cfg.Port))
 	if err != nil {
 		logger.Fatal(err)
 	}

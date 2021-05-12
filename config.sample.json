@@ -3,5 +3,6 @@
     "username": "super-awesome-grafana-bot",
     "homeserver": "https://abc.org",
     "channel_id": "!fTgsSfKxSeqEf:abc.org",
-    "secret_key": "22718ceb-511f-4723-b502-f53549ef60da"
+    "secret_key": "22718ceb-511f-4723-b502-f53549ef60da",
+    "port": 23423
 }
