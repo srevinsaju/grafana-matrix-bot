@@ -15,8 +15,8 @@ func SendMessage(client *mautrix.Client, channel string, webhook *types.GrafanaW
     if len(webhook.EvalMatches) > 0 {
         for i := range webhook.EvalMatches {
             metric := webhook.EvalMatches[i].Metrics
-            value := string(webhook.EvalMatches[i].Value)
-            metrics = fmt.Sprintf("%s\n%s = %s", metrics, metric, value)
+            value := webhook.EvalMatches[i].Value
+            metrics = fmt.Sprintf("%s\n%s = %d", metrics, metric, value)
         }
     }
 
