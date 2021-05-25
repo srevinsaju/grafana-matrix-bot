@@ -1,5 +1,9 @@
 package types
 
+type EvalMatch struct {
+    Value int `json:"value"`
+    Metrics string `json:"metrix"`
+}
 
 type GrafanaWebhook struct {
 	ImageUrl string `json:"imageUrl"`
@@ -8,4 +12,5 @@ type GrafanaWebhook struct {
 	RuleUrl string `json:"ruleUrl"`
 	State string `json:"state"`
 	Title string `json:"title"`
+    EvalMatches []EvalMatch `json:"evalMatches"`
 }

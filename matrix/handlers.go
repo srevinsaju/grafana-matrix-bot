@@ -11,9 +11,21 @@ import (
 
 func SendMessage(client *mautrix.Client, channel string, webhook *types.GrafanaWebhook) error {
 	var strMessage string
+    metrics := ""
+    if len(webhook.EvalMatches) > 0 {
+        for i := range webhook.EvalMatches {
+            metric := webhook.EvalMatches[i].Metrics
+            value := string(webhook.EvalMatches[i].Value)
+            metrics = fmt.Sprintf("%s\n%s = %s", metrics, metric, value)
+        }
+    }
+
 	strMessage = fmt.Sprintf(`**%s**
 %s
-[%s](%s)`, webhook.Title, webhook.Message, webhook.RuleName, webhook.RuleUrl )
+[%s](%s)
+
+%s
+`, webhook.Title, webhook.Message, webhook.RuleName, webhook.RuleUrl, metrics )
 
 	content := format.RenderMarkdown(strMessage, true, true)
 	_, err := client.SendMessageEvent(id.RoomID(channel), event.EventMessage, &content)
