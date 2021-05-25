@@ -2,7 +2,7 @@ package types
 
 type EvalMatch struct {
     Value int `json:"value"`
-    Metrics string `json:"metrix"`
+    Metrics string `json:"metric"`
 }
 
 type GrafanaWebhook struct {
